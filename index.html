@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+
+        <meta charset="utf-8">
+        <title>Fractal generator 2021</title>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.3.1/p5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+
+
+
+        <link rel="stylesheet" href="./css/master.css">
+    </head>
+    <body>
+
+
+        <button type="button" class="btn btn-warning" id ="switchBtn">Menu</button>
+
+
+        <div class="p-3 mb-2 bg-dark text-white text-center" id="menu">
+            <div class="row">
+                <div class="col-sm">
+                    <h4>Canvas</h4>
+
+                    <div class="input-group mb-6 w-50 mx-auto">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Width</span>
+                      </div>
+                      <input id="cWidth" type="number" class="form-control" placeholder="width" aria-label="Username" aria-describedby="basic-addon1">
+
+                    </div>
+
+                    <div class="input-group mb-6 w-50 mx-auto">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon2">Height</span>
+                      </div>
+                      <input id="cHeight" type="number" class="form-control" placeholder="height" aria-label="Username" aria-describedby="basic-addon2">
+
+                    </div>
+
+                </div>
+                <div class="col-sm">
+                    <h4>Poly</h4>
+
+                    <div class="input-group mb-6 w-50 mx-auto">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">Vertices</span>
+                      </div>
+                      <input id="vertices" type="number" class="form-control" placeholder="Vertices" aria-label="Username" aria-describedby="basic-addon3">
+
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <h4>Iterations</h4>
+
+                    <div class="input-group mb-6 w-50 mx-auto">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon4">it total</span>
+                      </div>
+                      <input id="it-total" type="number" class="form-control" placeholder="val" aria-label="Username" aria-describedby="basic-addon4" step="0.1">
+                    </div>
+
+                    <div class="input-group mb-6 w-50 mx-auto">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon5">it frame</span>
+                      </div>
+                      <input id="it-frame" type="number" class="form-control" placeholder="val" aria-label="Username" aria-describedby="basic-addon5" step="0.1">
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <h4>Props</h4>
+                    <div class="input-group mb-6 w-50 mx-auto">
+                        <input class="form-check-input" type="checkbox" id="helper" value="false">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          helper
+                        </label>
+                    </div>
+
+                    <div class="input-group mb-6 w-50 mx-auto">
+
+                        <input type="color" class="form-control form-control-color" id="bg-color" value="#0000ff" title="Choose your color">
+                        <label for="exampleColorInput" class="form-label"> bg color</label>
+                    </div>
+
+                    <hr/>
+
+                    <div class="input-group mb-6 w-50 mx-auto">
+
+                        <input type="color" class="form-control form-control-color" id="colorA" value="#ff0000" title="Choose your color">
+                        <label for="exampleColorInput" class="form-label">color A</label>
+                    </div>
+
+                    <div class="input-group mb-6 w-50 mx-auto">
+
+                        <input type="color" class="form-control form-control-color" id="colorB" value="#0000ff" title="Choose your color">
+                        <label for="exampleColorInput" class="form-label">color B</label>
+                    </div>
+
+                    <div class="input-group mb-6 w-50 mx-auto">
+                        <label for="customRange1" class="form-label" id="label-percentage">percentage</label>
+                        <input type="range" class="form-range" id="percentage" step="0.05" min="0" max="1">
+                    </div>
+
+                    <div class="input-group mb-6 w-50 mx-auto">
+                        <label for="customRange1" class="form-label" id="label-angle">angle</label>
+                        <input type="range" class="form-range" id="angle" step="1" min="0" max="360">
+                    </div>
+
+                </div>
+                <div class="col-sm">
+                    <h4>export</h4>
+
+                        <button type="button" class="btn btn-primary" id="btn-reset">reset</button>
+                        <br/>
+                        <button type="button" class="btn btn-primary" id="btn-download">download</button>
+                        <br/>
+                        <button type="button" class="btn btn-success" id="btn-save">save props</button>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="./js/state.js" charset="utf-8"></script>
+        <script src="./js/serialization/savenload.js" charset="utf-8"></script>
+
+        <!-- APP -->
+        <script src="./js/app/classes/poly.js" charset="utf-8"></script>
+        <script src="./js/app/main.js" charset="utf-8"></script>
+
+        <!--  UI  -->
+        <script src="./js/controllers/btnController.js" charset="utf-8"></script>
+        <script src="./js/controllers/canvasController.js" charset="utf-8"></script>
+        <script src="./js/controllers/polyController.js" charset="utf-8"></script>
+        <script src="./js/controllers/itController.js" charset="utf-8"></script>
+        <script src="./js/controllers/propsController.js" charset="utf-8"></script>
+
+        <script src="./js/controllers/shorcuts.js" charset="utf-8"></script>
+
+        <script src="./js/ready.js" charset="utf-8"></script>
+    </body>
+</html>
